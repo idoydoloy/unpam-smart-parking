@@ -109,9 +109,10 @@ app.post('/login-petugas', async (req, res) => {
             return res.redirect('/');
         }
         res.render('login-petugas', { error: 'Username Petugas atau Password salah!' });
-    } catch (error) {
-        res.status(500).send("Eror sistem login");
-    }
+   } catch (error) {
+    res.status(500).send("Eror sistem login: " + error.message);
+}
+
 });
 
 // Proses Logout
