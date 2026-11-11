@@ -1,0 +1,600 @@
+
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login Petugas | UNPAM Parking</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            width: 100%;
+            min-height: 100%;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            min-height: 100dvh;
+            background: #f1f5f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 25px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1000px;
+            min-height: 570px;
+            display: flex;
+            background: #fff;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 15px 50px rgba(15, 23, 42, 0.08);
+        }
+
+        /* LEFT PANEL */
+        .left-panel {
+            width: 48%;
+            background: linear-gradient(145deg, #193b75, #0b1d3a);
+            padding: 45px;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .left-panel::before {
+            content: "";
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 50%;
+            right: -190px;
+            top: 100px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            position: relative;
+            z-index: 1;
+        }
+
+       .brand img {
+        width: 50px;
+        height: 50px;
+        object-fit: contain;
+        }
+
+        .brand h3 {
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .brand p {
+            font-size: 10px;
+            color: #b8c9e5;
+            margin-top: 5px;
+        }
+
+        .hero {
+            position: relative;
+            z-index: 1;
+            margin-top: 40px;
+        }
+
+        .tagline {
+            font-size: 11px;
+            color: #fbbf24;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: 34px;
+            line-height: 1.35;
+            font-weight: 800;
+            margin-bottom: 18px;
+        }
+
+        .hero h1 span {
+            color: #fbbf24;
+        }
+
+        .hero p {
+            color: #cbd5e1;
+            font-size: 13px;
+            line-height: 1.9;
+            max-width: 330px;
+        }
+
+        .staff-card {
+            margin-top: 35px;
+            padding: 28px 20px;
+            border-radius: 12px;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.12);
+            text-align: center;
+        }
+
+        .staff-card i {
+            font-size: 45px;
+            color: #fbbf24;
+            margin-bottom: 18px;
+        }
+
+        .staff-card h3 {
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .staff-card p {
+            font-size: 11px;
+            color: #b8c9e5;
+        }
+
+        .footer-left {
+            position: relative;
+            z-index: 1;
+            font-size: 10px;
+            color: #94a3b8;
+            margin-top: 35px;
+        }
+
+        /* RIGHT PANEL */
+        .right-panel {
+            width: 52%;
+            min-width: 0;
+            padding: 55px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .heading {
+            margin-bottom: 35px;
+        }
+
+        .heading .badge {
+            display: inline-block;
+            padding: 7px 12px;
+            background: #fffbeb;
+            color: #b45309;
+            border-radius: 5px;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+        }
+
+        .heading h2 {
+            font-size: 28px;
+            color: #172554;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .heading p {
+            color: #64748b;
+            font-size: 12px;
+            line-height: 1.8;
+        }
+
+        .error-msg {
+            background: #fef2f2;
+            color: #dc2626;
+            border: 1px solid #fecaca;
+            padding: 12px;
+            border-radius: 7px;
+            font-size: 12px;
+            margin-bottom: 20px;
+            overflow-wrap: anywhere;
+        }
+
+        .form-group {
+            margin-bottom: 22px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            color: #334155;
+            margin-bottom: 10px;
+        }
+
+        .input-wrapper {
+            position: relative;
+            width: 100%;
+        }
+
+        .input-wrapper i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #94a3b8;
+            font-size: 14px;
+        }
+
+        .input-wrapper input {
+            width: 100%;
+            height: 48px;
+            padding: 0 15px 0 43px;
+            border: 1px solid #e2e8f0;
+            border-radius: 7px;
+            background: #f8fafc;
+            outline: none;
+            font-size: 12px;
+            font-family: inherit;
+            color: #1e293b;
+            transition: 0.2s;
+        }
+
+        .input-wrapper input:focus {
+            border-color: #d97706;
+            background: #fff;
+            box-shadow: 0 0 0 3px rgba(217,119,6,0.08);
+        }
+
+        .input-wrapper input::placeholder {
+            color: #94a3b8;
+        }
+
+        .login-button {
+            width: 100%;
+            min-height: 49px;
+            background: #b45309;
+            border: none;
+            border-radius: 7px;
+            color: white;
+            font-size: 13px;
+            font-weight: 700;
+            font-family: inherit;
+            cursor: pointer;
+            margin-top: 5px;
+            transition: 0.25s;
+        }
+
+        .login-button:hover {
+            background: #92400e;
+            box-shadow: 0 6px 15px rgba(180,83,9,0.18);
+        }
+
+        .back-link {
+            text-align: center;
+            margin-top: 28px;
+        }
+
+        .back-link a {
+            color: #475569;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+
+        .back-link a:hover {
+            color: #b45309;
+        }
+
+        .security-note {
+            text-align: center;
+            margin-top: 35px;
+            color: #94a3b8;
+            font-size: 10px;
+        }
+
+        /* TABLET */
+        @media (max-width: 900px) {
+            body {
+                padding: 20px;
+            }
+
+            .container {
+                max-width: 760px;
+                min-height: 520px;
+            }
+
+            .left-panel {
+                padding: 30px;
+            }
+
+            .right-panel {
+                padding: 35px;
+            }
+
+            .hero h1 {
+                font-size: 29px;
+            }
+
+            .heading h2 {
+                font-size: 25px;
+            }
+        }
+
+        /* MOBILE */
+        @media (max-width: 768px) {
+            body {
+                padding: 20px;
+                align-items: center;
+            }
+
+            .container {
+                width: 100%;
+                max-width: 430px;
+                min-height: auto;
+                border-radius: 14px;
+            }
+
+            .left-panel {
+                display: none;
+            }
+
+            .right-panel {
+                width: 100%;
+                padding: 40px 28px;
+            }
+
+            .heading {
+                margin-bottom: 30px;
+            }
+
+            .heading h2 {
+                font-size: 25px;
+            }
+
+            .security-note {
+                margin-top: 30px;
+            }
+        }
+
+        /* HP KECIL */
+        @media (max-width: 480px) {
+            body {
+                padding: 15px;
+            }
+
+            .container {
+                border-radius: 12px;
+            }
+
+            .right-panel {
+                padding: 32px 22px;
+            }
+
+            .heading .badge {
+                margin-bottom: 16px;
+            }
+
+            .heading h2 {
+                font-size: 23px;
+            }
+
+            .heading p {
+                font-size: 12px;
+            }
+
+            .form-group {
+                margin-bottom: 19px;
+            }
+
+            .input-wrapper input {
+                height: 46px;
+                font-size: 13px;
+            }
+
+            .login-button {
+                min-height: 47px;
+            }
+
+            .back-link {
+                margin-top: 24px;
+            }
+
+            .security-note {
+                margin-top: 27px;
+            }
+        }
+
+        /* HP SANGAT KECIL */
+        @media (max-width: 360px) {
+            body {
+                padding: 10px;
+            }
+
+            .right-panel {
+                padding: 28px 18px;
+            }
+
+            .heading h2 {
+                font-size: 21px;
+            }
+
+            .heading p {
+                font-size: 11px;
+            }
+
+            .input-wrapper input {
+                font-size: 11px;
+            }
+
+            .back-link a {
+                font-size: 11px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- LEFT PANEL -->
+    <section class="left-panel">
+
+        <div class="brand">
+            <div class="brand-icon">
+               <img src="/logo_unpam.webp" alt="Logo UNPAM">
+            </div>
+
+            <div>
+                <h3>UNPAM PARKING</h3>
+                <p>Smart Campus Parking System</p>
+            </div>
+        </div>
+
+        <div class="hero">
+
+            <div class="tagline">Staff & Officer Portal</div>
+
+            <h1>Kelola Parkir<br>Lebih <span>Teratur</span><br>dan Efisien.</h1>
+
+            <p>
+                Portal khusus petugas parkir untuk mengakses
+                sistem pengelolaan parkir kampus secara praktis,
+                terstruktur, dan terintegrasi.
+            </p>
+
+            <div class="staff-card">
+                <i class="fa-solid fa-user-shield"></i>
+                <h3>Staff Parking Management</h3>
+                <p>Authorized Personnel Access</p>
+            </div>
+
+        </div>
+
+        <div class="footer-left">
+            © 2026 UNPAM Parking System. All rights reserved.
+        </div>
+
+    </section>
+
+
+    <!-- RIGHT PANEL -->
+    <section class="right-panel">
+
+        <div class="heading">
+
+            <span class="badge">OFFICER PORTAL</span>
+
+            <h2>Login Petugas</h2>
+
+            <p>
+                Silakan masuk menggunakan akun petugas
+                yang telah terdaftar untuk mengakses sistem.
+            </p>
+
+        </div>
+
+        <% if (locals.error) { %>
+            <div class="error-msg">
+                <i class="fa-solid fa-circle-exclamation"></i>
+                <%= error %>
+            </div>
+        <% } %>
+
+        <form action="/login-petugas" method="POST">
+
+            <div class="form-group">
+
+                <label for="username_petugas">Username Petugas</label>
+
+                <div class="input-wrapper">
+                    <i class="fa-regular fa-user"></i>
+
+                    <input
+                        type="text"
+                        id="username_petugas"
+                        name="username_petugas"
+                        required
+                        placeholder="Masukkan username petugas"
+                        autocomplete="username"
+                    >
+                </div>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="password">Password Akun</label>
+
+                <div class="input-wrapper">
+                    <i class="fa-solid fa-lock"></i>
+
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        required
+                        placeholder="Masukkan password"
+                        autocomplete="current-password"
+                    >
+                </div>
+
+            </div>
+
+
+            <button type="submit" class="login-button">
+                Masuk ke Sistem
+                <i class="fa-solid fa-arrow-right" style="margin-left: 8px;"></i>
+            </button>
+
+        </form>
+
+
+        <div class="back-link">
+            <a href="/login-mahasiswa">
+                <i class="fa-solid fa-arrow-left"></i>
+                Kembali ke Login Mahasiswa
+            </a>
+        </div>
+
+
+        <div class="security-note">
+            <i class="fa-solid fa-lock"></i>
+            Authorized Personnel Only
+        </div>
+
+    </section>
+
+</div>
+
+</body>
+<script>
+     app.use(express.static('public'));
+</script>
+</html>

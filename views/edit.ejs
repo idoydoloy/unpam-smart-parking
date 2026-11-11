@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<!-- <html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Status Kapasitas Parkir</title>
+    <style>
+        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 40px; background-color: #f4f7f6; color: #333; }
+        .container { max-width: 500px; margin: auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        h2 { color: #1e3a8a; margin-top: 0; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; }
+        label { font-weight: bold; display: block; margin-top: 15px; color: #475569; }
+        input, textarea, select { width: 100%; padding: 10px; margin: 6px 0 14px 0; box-sizing: border-box; border: 1px solid #cbd5e1; border-radius: 4px; font-size: 14px; }
+        button { background-color: #d97706; color: white; padding: 12px 15px; border: none; cursor: pointer; border-radius: 4px; width: 100%; font-weight: bold; font-size: 16px; }
+        button:hover { background-color: #b45309; }
+        .back-link { display: block; margin-top: 20px; text-align: center; color: #64748b; text-decoration: none; font-size: 14px; }
+        .back-link:hover { color: #1e3a8a; text-decoration: underline; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>✏️ Panel Petugas: Perbarui Kapasitas Lahan</h2>
+    <form action="/parkir/update/<%= parkir.id %>" method="POST">
+        <label>Nama Lokasi / Lantai:</label>
+        <input type="text" value="<%= parkir.lantai %>" readonly style="background-color: #e2e8f0; color: #64748b;">
+        
+        <label>Nama Petugas Pengupdate (Satpam/Jukir):</label>
+        <input type="text" name="petugas" value="<%= parkir.petugas %>" required>
+        
+        <label>Ubah Status Kapasitas:</label>
+        <select name="status">
+            <option value="TERSEDIA (KOSONG)" <%= parkir.status === 'TERSEDIA (KOSONG)' ? 'selected' : '' %>>TERSEDIA (KOSONG)</option>
+            <option value="PENGISIAN (RAMAI)" <%= parkir.status === 'PENGISIAN (RAMAI)' ? 'selected' : '' %>>PENGISIAN (RAMAI)</option>
+            <option value="PENUH (DITUTUP)" <%= parkir.status === 'PENUH (DITUTUP)' ? 'selected' : '' %>>PENUH (DITUTUP)</option>
+        </select>
+        
+        <label>Instruksi Terbaru untuk Mahasiswa:</label>
+        <textarea name="keterangan" rows="4" required><%= parkir.keterangan %></textarea>
+        
+        <button type="submit">Terapkan Perubahan Status</button>
+    </form>
+    <a href="/" class="back-link">⬅️ Kembali ke Dashboard Utama</a>
+</div>
+
+</body>
+</html>

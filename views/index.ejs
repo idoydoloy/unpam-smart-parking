@@ -1,0 +1,1776 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UNPAM Smart Parking & Crisis Center</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>    
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: #f1f5f9;
+    color: #1e293b;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* HEADER */
+.topbar {
+    background: #fff;
+    border-bottom: 1px solid #e2e8f0;
+    padding: 17px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+}
+.brand img {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+}
+
+
+.brand h2 {
+    font-size: 16px;
+    color: #172554;
+    font-weight: 800;
+    letter-spacing: .3px;
+}
+
+.brand p {
+    font-size: 10px;
+    color: #64748b;
+    margin-top: 4px;
+}
+
+.profile-area {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.profile-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.profile-icon {
+    width: 39px;
+    height: 39px;
+    flex-shrink: 0;
+    background: #eff6ff;
+    color: #1e40af;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+}
+
+.profile-text strong {
+    display: block;
+    font-size: 12px;
+    color: #1e293b;
+}
+
+.profile-text span {
+    display: block;
+    font-size: 10px;
+    color: #64748b;
+    margin-top: 4px;
+}
+
+.btn-logout {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    background: #fef2f2;
+    color: #dc2626;
+    padding: 10px 14px;
+    border-radius: 7px;
+    text-decoration: none;
+    font-size: 11px;
+    font-weight: 700;
+    transition: .2s;
+    white-space: nowrap;
+}
+
+.btn-logout:hover {
+    background: #fee2e2;
+}
+
+/* MAIN CONTAINER */
+.container {
+    max-width: 1400px;
+    width: 90%;
+    margin: 35px auto;
+}
+
+/* WELCOME SECTION */
+.welcome-section {
+    background: linear-gradient(120deg, #193b75, #0b1d3a);
+    border-radius: 13px;
+    padding: 32px 35px;
+    color: white;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 30px;
+}
+
+.welcome-section::after {
+    content: "";
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    border: 1px solid rgba(255,255,255,.10);
+    border-radius: 50%;
+    right: -80px;
+    top: -130px;
+}
+
+.welcome-content {
+    position: relative;
+    z-index: 1;
+}
+
+.welcome-content .tagline {
+    color: #93c5fd;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+}
+
+.welcome-content h1 {
+    font-size: 25px;
+    font-weight: 800;
+    margin-bottom: 10px;
+    overflow-wrap: anywhere;
+}
+
+.welcome-content p {
+    color: #cbd5e1;
+    font-size: 12px;
+    line-height: 1.8;
+    max-width: 600px;
+}
+
+/* SECTION TITLE */
+.section-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 17px;
+    gap: 12px;
+}
+
+.section-heading h2 {
+    font-size: 17px;
+    color: #172554;
+    font-weight: 800;
+}
+
+.section-heading p {
+    color: #64748b;
+    font-size: 11px;
+    margin-top: 5px;
+    line-height: 1.6;
+}
+
+.section-icon {
+    width: 38px;
+    height: 38px;
+    flex-shrink: 0;
+    background: #eff6ff;
+    color: #1e40af;
+    border-radius: 9px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 15px;
+}
+
+/* CARD */
+.card,
+.form-card {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 11px;
+    padding: 23px;
+    box-shadow: 0 3px 12px rgba(15,23,42,.025);
+    min-width: 0;
+}
+
+/* TABLE */
+.table-wrapper {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: #cbd5e1 #f8fafc;
+}
+
+.table-wrapper::-webkit-scrollbar {
+    height: 6px;
+}
+
+.table-wrapper::-webkit-scrollbar-track {
+    background: #f8fafc;
+    border-radius: 10px;
+}
+
+.table-wrapper::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 10px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 650px;
+}
+
+th {
+    background: #f8fafc;
+    color: #475569;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .4px;
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #e2e8f0;
+    white-space: nowrap;
+}
+
+td {
+    padding: 16px 15px;
+    font-size: 12px;
+    color: #475569;
+    border-bottom: 1px solid #f1f5f9;
+    line-height: 1.7;
+    vertical-align: middle;
+}
+
+tbody tr {
+    transition: .2s;
+}
+
+tbody tr:hover {
+    background: #f8fafc;
+}
+
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+td strong {
+    color: #1e293b;
+}
+
+/* STATUS BADGE */
+.badge {
+    display: inline-block;
+    padding: 6px 10px;
+    border-radius: 5px;
+    font-size: 10px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.badge-penuh {
+    background: #fee2e2;
+    color: #dc2626;
+}
+
+.badge-tersedia {
+    background: #dcfce7;
+    color: #15803d;
+}
+
+.badge-ramai {
+    background: #fef9c3;
+    color: #a16207;
+}
+
+.badge-kehilangan {
+    background: #ffedd5;
+    color: #c2410c;
+}
+
+.badge-keluhan {
+    background: #e0f2fe;
+    color: #0369a1;
+}
+
+/* ACTION BUTTONS */
+.btn-petugas {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    padding: 8px 11px;
+    background: #fffbeb;
+    color: #b45309;
+    border: 1px solid #fde68a;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 10px;
+    font-weight: 700;
+    white-space: nowrap;
+    transition: .2s;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+}
+
+button.delete {
+    background: #fef2f2;
+    color: #dc2626;
+    border: 1px solid #fecaca;
+    padding: 10px 6px;
+    border-radius: 6px;
+    font-size: 10px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: .2s;
+    white-space: nowrap;
+}
+
+button.delete:hover {
+    background: #fee2e2;
+}
+
+.no-access {
+    color: #94a3b8;
+    font-size: 10px;
+    font-style: italic;
+}
+
+/* MODAL UMUM */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(15,23,42,.60);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.modal-overlay.active {
+    display: flex;
+}
+
+.modal-box {
+    width: 100%;
+    max-width: 520px;
+    max-height: 90vh;
+    overflow-y: auto;
+    background: #fff;
+    border-radius: 16px;
+    padding: 28px;
+    box-shadow: 0 20px 60px rgba(0,0,0,.2);
+    animation: modalMasuk .2s ease;
+    margin: auto;
+}
+
+@keyframes modalMasuk {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 15px;
+    margin-bottom: 22px;
+}
+
+.modal-subtitle {
+    color: #2563eb;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.modal-header h2 {
+    color: #172554;
+    font-size: 20px;
+    margin: 7px 0;
+}
+
+.modal-header p {
+    color: #64748b;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.modal-close {
+    border: none;
+    background: #f1f5f9;
+    color: #475569;
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    font-size: 23px;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.modal-close:hover {
+    background: #e2e8f0;
+}
+
+.modal-box label {
+    display: block;
+    color: #334155;
+    font-size: 12px;
+    font-weight: 700;
+    margin: 15px 0 7px;
+}
+
+.modal-box input,
+.modal-box select,
+.modal-box textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px;
+    border: 1px solid #dbe2ea;
+    border-radius: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    outline: none;
+    color: #334155;
+    background: #fff;
+}
+
+.modal-box input:focus,
+.modal-box select:focus,
+.modal-box textarea:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37,99,235,.1);
+}
+
+.modal-box input[readonly] {
+    background: #f1f5f9;
+    color: #64748b;
+}
+
+.modal-box textarea {
+    min-height: 100px;
+    resize: vertical;
+    line-height: 1.6;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 22px;
+}
+
+.modal-actions button {
+    flex: 1;
+    min-width: 0;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 12px;
+    transition: .2s;
+}
+
+.btn-cancel {
+    background: #f1f5f9;
+    color: #475569;
+}
+
+.btn-cancel:hover {
+    background: #e2e8f0;
+}
+
+.btn-save {
+    background: #193b75;
+    color: white;
+}
+
+.btn-save:hover {
+    background: #24519a;
+}
+
+/* CRISIS CENTER */
+.crisis-section {
+    margin-top: 35px;
+}
+
+.grid-section {
+    display: grid;
+    grid-template-columns: minmax(0,1.6fr) minmax(280px,.9fr);
+    gap: 22px;
+    align-items: start;
+}
+
+.report-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 18px;
+}
+
+.report-title h3 {
+    font-size: 14px;
+    color: #172554;
+    font-weight: 700;
+}
+
+.report-title span {
+    font-size: 10px;
+    color: #64748b;
+}
+
+.report-detail {
+    max-width: 350px;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+}
+
+.report-detail strong {
+    display: block;
+    margin-bottom: 4px;
+}
+
+.report-detail span {
+    font-size: 11px;
+    color: #64748b;
+}
+
+/* REPORT FORM */
+.form-heading {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    margin-bottom: 22px;
+}
+
+.form-heading .icon {
+    width: 39px;
+    height: 39px;
+    flex-shrink: 0;
+    background: #eff6ff;
+    color: #1e40af;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-heading h3 {
+    font-size: 14px;
+    color: #172554;
+    font-weight: 700;
+}
+
+.form-heading p {
+    color: #64748b;
+    font-size: 10px;
+    margin-top: 4px;
+}
+
+.form-group {
+    margin-bottom: 17px;
+}
+
+label {
+    display: block;
+    color: #334155;
+    font-size: 11px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+input,
+textarea,
+select {
+    width: 100%;
+    max-width: 100%;
+    padding: 11px 12px;
+    border: 1px solid #e2e8f0;
+    border-radius: 7px;
+    background: #f8fafc;
+    color: #334155;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    outline: none;
+    transition: .2s;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    border-color: #2563eb;
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(37,99,235,.08);
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: #94a3b8;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 105px;
+    line-height: 1.6;
+}
+
+.btn-submit {
+    width: 100%;
+    padding: 13px;
+    background: #193b75;
+    color: #fff;
+    border: none;
+    border-radius: 7px;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.btn-submit:hover {
+    background: #24519a;
+    box-shadow: 0 5px 15px rgba(25,59,117,.15);
+}
+
+/* LOCKED ACCESS */
+.locked-panel {
+    text-align: center;
+    padding: 35px 15px;
+}
+
+.locked-icon {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 17px;
+    border-radius: 50%;
+    background: #fef3c7;
+    color: #b45309;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 23px;
+}
+
+.locked-panel h3 {
+    color: #172554;
+    font-size: 14px;
+    margin-bottom: 9px;
+}
+
+.locked-panel p {
+    color: #64748b;
+    font-size: 11px;
+    line-height: 1.8;
+}
+
+/* EMPTY STATE */
+.empty-state {
+    text-align: center;
+    padding: 30px 15px;
+    color: #94a3b8;
+    font-size: 12px;
+}
+
+.empty-state i {
+    display: block;
+    font-size: 25px;
+    margin-bottom: 12px;
+}
+
+/* FOOTER */
+.footer {
+    text-align: center;
+    padding: 25px 10px;
+    margin-top: 35px;
+    border-top: 1px solid #e2e8f0;
+    color: #94a3b8;
+    font-size: 10px;
+    line-height: 1.6;
+}
+
+/* MODAL EDIT PENGADUAN */
+.edit-laporan-overlay {
+    z-index: 10000;
+}
+
+.edit-modal-box {
+    max-width: 670px;
+}
+
+.edit-modal-box .modal-header {
+    margin-bottom: 22px;
+}
+
+.edit-modal-box .modal-header h2 {
+    font-size: 25px;
+    margin: 8px 0;
+}
+
+.edit-modal-box .modal-header p {
+    font-size: 14px;
+}
+
+.edit-modal-box label {
+    margin: 17px 0 8px;
+    font-size: 13px;
+}
+
+.edit-modal-box input,
+.edit-modal-box select,
+.edit-modal-box textarea {
+    font-size: 13px;
+    padding: 13px 15px;
+    border-radius: 10px;
+}
+
+.edit-modal-box textarea {
+    min-height: 115px;
+}
+
+/* PREVIEW FOTO POPUP EDIT */
+.edit-photo-preview {
+    margin: 10px 0 18px;
+    padding: 12px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    width: fit-content;
+    max-width: 100%;
+}
+
+.edit-photo-preview img {
+    display: block;
+    width: 150px;
+    max-width: 100%;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid #dbe2ec;
+}
+
+.edit-no-photo {
+    color: #94a3b8;
+    font-size: 12px;
+    margin: 10px 0 18px;
+}
+
+.edit-help {
+    display: block;
+    margin-top: 8px;
+    color: #64748b;
+    font-size: 11px;
+    line-height: 1.5;
+}
+
+.edit-modal-box .modal-actions {
+    margin-top: 28px;
+}
+
+/* TABLET */
+@media (max-width: 1000px) {
+    .container {
+        width: 94%;
+    }
+
+    .grid-section {
+        grid-template-columns: 1fr;
+    }
+
+    .form-card {
+        width: 100%;
+    }
+
+    .edit-modal-box {
+        max-width: 600px;
+    }
+}
+
+/* HP */
+@media (max-width: 600px) {
+    .topbar {
+        padding: 12px 4%;
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+
+    .brand h2 {
+        font-size: 13px;
+    }
+
+    .brand p {
+        font-size: 9px;
+    }
+
+    .brand-icon {
+        width: 38px;
+        height: 38px;
+        font-size: 16px;
+    }
+
+    .profile-area {
+        width: 100%;
+        justify-content: space-between;
+        border-top: 1px solid #f1f5f9;
+        padding-top: 12px;
+        gap: 8px;
+    }
+
+    .profile-text strong {
+        font-size: 11px;
+    }
+
+    .profile-text span {
+        font-size: 9px;
+    }
+
+    .btn-logout {
+        padding: 9px 11px;
+        font-size: 10px;
+    }
+
+    .container {
+        width: 92%;
+        margin: 22px auto;
+    }
+
+    .welcome-section {
+        padding: 24px 20px;
+        margin-bottom: 24px;
+    }
+
+    .welcome-content h1 {
+        font-size: 20px;
+        line-height: 1.4;
+    }
+
+    .welcome-content p {
+        font-size: 11px;
+    }
+
+    .welcome-content .tagline {
+        font-size: 9px;
+    }
+
+    .section-heading {
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .section-heading h2 {
+        font-size: 15px;
+        line-height: 1.4;
+    }
+
+    .section-heading p {
+        font-size: 10px;
+    }
+
+    .section-icon {
+        width: 34px;
+        height: 34px;
+        font-size: 13px;
+    }
+
+    .card,
+    .form-card {
+        padding: 15px;
+        border-radius: 10px;
+    }
+
+    .grid-section {
+        gap: 17px;
+    }
+
+    .report-title {
+        align-items: flex-start;
+        flex-wrap: wrap;
+    }
+
+    .report-title h3 {
+        font-size: 13px;
+    }
+
+    .report-title span {
+        font-size: 9px;
+    }
+
+    /* Tabel tetap utuh dan bisa digeser ke samping */
+    table {
+        min-width: 650px;
+    }
+
+    th {
+        padding: 12px 10px;
+        font-size: 10px;
+    }
+
+    td {
+        padding: 12px 10px;
+        font-size: 11px;
+    }
+
+    .report-detail {
+        max-width: 230px;
+    }
+
+    .report-detail span {
+        font-size: 10px;
+    }
+
+    .btn-petugas {
+        padding: 8px 9px;
+        font-size: 9px;
+    }
+
+    button.delete {
+        padding: 9px 8px;
+        font-size: 9px;
+    }
+
+    .form-heading h3 {
+        font-size: 13px;
+    }
+
+    .form-heading p {
+        font-size: 9px;
+    }
+
+    .form-group {
+        margin-bottom: 14px;
+    }
+
+    input,
+    textarea,
+    select {
+        font-size: 12px;
+        padding: 11px;
+    }
+
+    .btn-submit {
+        padding: 12px;
+        font-size: 11px;
+    }
+
+    .locked-panel {
+        padding: 25px 10px;
+    }
+
+    .footer {
+        margin-top: 25px;
+        font-size: 9px;
+    }
+
+    /* MODAL DI HP */
+    .modal-overlay {
+        padding: 12px;
+        align-items: center;
+    }
+
+    .modal-box {
+        width: 100%;
+        max-width: 100%;
+        max-height: 88vh;
+        padding: 20px;
+        border-radius: 13px;
+    }
+
+    .modal-header {
+        gap: 10px;
+        margin-bottom: 17px;
+    }
+
+    .modal-header h2 {
+        font-size: 18px;
+    }
+
+    .modal-header p {
+        font-size: 11px;
+    }
+
+    .modal-subtitle {
+        font-size: 9px;
+    }
+
+    .modal-box label {
+        font-size: 11px;
+    }
+
+    .modal-box input,
+    .modal-box select,
+    .modal-box textarea {
+        font-size: 12px;
+        padding: 11px;
+    }
+
+    .modal-actions {
+        gap: 8px;
+    }
+
+    .modal-actions button {
+        padding: 11px 8px;
+        font-size: 11px;
+    }
+
+    /* MODAL EDIT PENGADUAN DI HP */
+    .edit-modal-box {
+        max-width: 100%;
+        padding: 20px;
+    }
+
+    .edit-modal-box .modal-header h2 {
+        font-size: 20px;
+    }
+
+    .edit-modal-box .modal-header p {
+        font-size: 11px;
+    }
+
+    .edit-modal-box label {
+        font-size: 11px;
+        margin: 14px 0 7px;
+    }
+
+    .edit-modal-box input,
+    .edit-modal-box select,
+    .edit-modal-box textarea {
+        font-size: 12px;
+        padding: 11px;
+    }
+
+    .edit-photo-preview {
+        padding: 9px;
+    }
+
+    .edit-photo-preview img {
+        width: 130px;
+        height: 105px;
+    }
+
+    .edit-help {
+        font-size: 10px;
+    }
+
+    .edit-modal-box .modal-actions {
+        margin-top: 20px;
+        flex-direction: column-reverse;
+    }
+
+    .edit-modal-box .modal-actions button {
+        width: 100%;
+        padding: 12px;
+    }
+}
+
+/* HP KECIL */
+@media (max-width: 360px) {
+    .container {
+        width: 94%;
+    }
+
+    .brand h2 {
+        font-size: 12px;
+    }
+
+    .profile-icon {
+        width: 34px;
+        height: 34px;
+    }
+
+    .welcome-content h1 {
+        font-size: 18px;
+    }
+
+    .card,
+    .form-card {
+        padding: 12px;
+    }
+
+    .modal-overlay {
+        padding: 8px;
+    }
+
+    .modal-box {
+        padding: 16px;
+    }
+
+    .edit-modal-box .modal-header h2 {
+        font-size: 18px;
+    }
+}
+</style>
+</head>
+<body>
+    <!--HEADER-->
+    <header class="topbar">
+
+        <div class="brand">
+            <img src="/logo_unpam.webp" alt="Logo UNPAM">
+            <div>
+                <h2>UNPAM Smart Parking</h2>
+                <p>Parking & Crisis Center</p>
+            </div>
+        </div>
+        <div class="profile-area">
+            <div class="profile-info">
+                <div class="profile-icon">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+                <div class="profile-text">
+                    <strong><%= user.nama %></strong>
+                    <span>
+                        <%= user.role.toUpperCase() %>
+                    </span>
+                </div>
+            </div>
+            <a href="/logout" class="btn-logout">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                Logout
+            </a>
+        </div>
+    </header>
+     <main class="container">
+        <!--WELCOME SECTION-->
+        <section class="welcome-section">
+            <div class="welcome-content">
+                <div class="tagline">
+                    UNPAM SMART PARKING SYSTEM
+                </div>
+                <h1>Selamat Datang, <%= user.nama %></h1>
+                <p>
+                    Pantau informasi kapasitas parkir kampus,
+                    lihat laporan mahasiswa, dan akses layanan
+                    sesuai dengan hak akses akun Anda.
+                </p>
+            </div>
+        </section>
+        <!--BAGIAN 1: STATUS PARKIR -->
+        <section>
+            <div class="section-heading">
+                <div>
+                    <h2>Status Kapasitas Lahan Parkir</h2>
+                    <p>Informasi ketersediaan parkir berdasarkan pembaruan petugas.</p>
+                </div>
+                <div class="section-icon">
+                    <i class="fa-solid fa-car"></i>
+                </div>
+            </div>
+            <div class="card">
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="width: 25%;">Area Gedung / Lantai</th>
+                                <th style="width: 18%;">Status Kuota</th>
+                                <th style="width: 37%;">Keterangan Petugas</th>
+                                <th style="width: 20%;">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% if (dataParkirLantai.length === 0) { %>
+                            <tr>
+                                <td colspan="4">
+                                    <div class="empty-state">
+                                        <i class="fa-solid fa-square-parking"></i>
+                                        Belum ada informasi kapasitas parkir.
+                                    </div>
+                                </td>
+                            </tr>
+                            <% } %>
+                            <% dataParkirLantai.forEach(item => { %>
+                            <tr>
+                                <td>
+                                    <strong><%= item.lantai %></strong>
+                                </td>
+                                <td>
+                                    <span
+                                        class="badge <%= item.status === 'PENUH (DITUTUP)' ? 'badge-penuh' : (item.status === 'TERSEDIA (KOSONG)' ? 'badge-tersedia' : 'badge-ramai') %>">
+                                        <%= item.status %>
+                                    </span>
+                                </td>
+                                <td>
+                                    <%= item.keterangan %>
+                                    <br>
+                                    <small style="color:#94a3b8; font-size:10px;">
+                                        Di-update oleh:
+                                        <strong><%= item.nama_petugas %></strong>
+                                        (Shift: <%= item.shift %>)
+                                    </small>
+                                </td>
+                                <td>
+                                    <% if (user.role === 'petugas') { %>
+                                    <button type="button" class="btn-petugas" onclick="bukaModalParkir(this)"
+                                        data-id="<%= item.id %>" data-lantai="<%= item.lantai %>"
+                                        data-petugas="<%= item.nama_petugas || '' %>" data-status="<%= item.status %>"
+                                        data-keterangan="<%= item.keterangan || '' %>">
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                        Ubah Kapasitas
+                                    </button>
+                                    <% } else { %>
+                                    <span class="no-access">
+                                        Khusus Akses Petugas
+                                    </span>
+                                    <% } %>
+                                </td>
+                            </tr>
+                            <% }) %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+        <!--BAGIAN 2: CRISIS CENTER-->
+        
+        <section class="crisis-section">
+            <div class="section-heading">
+                <div>
+                    <h2>Pusat Krisis & Keluhan</h2>
+                    <p>Informasi pengaduan dan laporan kejadian di area parkir kampus.</p>
+                </div>
+                <div class="section-icon">
+                    <i class="fa-solid fa-headset"></i>
+                </div>
+            </div>
+
+            <div class="grid-section">
+
+                <!-- DAFTAR LAPORAN -->
+                <div class="card">
+                    <div class="report-title">
+                        <h3>Daftar Pengaduan Aktif</h3>
+                        <span>
+                            <i class="fa-regular fa-clipboard"></i>
+                            Crisis Center
+                        </span>
+                    </div>
+
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Kategori</th>
+                                    <th>Detail Kejadian</th>
+                                    <th>Bukti Foto</th>
+                                    <th>Pelapor</th>
+                                    <th>Tindakan</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <% if (dataLaporanMahasiswa.length === 0) { %>
+                                    <tr>
+                                        <td colspan="5">
+                                            <div class="empty-state">
+                                                <i class="fa-regular fa-folder-open"></i>
+                                                Belum ada laporan pengaduan.
+                                            </div>
+                                        </td>
+                                    </tr>
+                                <% } %>
+
+                                <% dataLaporanMahasiswa.forEach(item => { %>
+                                    <tr>
+                                        <td>
+                                            <span class="badge <%= item.kategori === 'Kehilangan' ? 'badge-kehilangan' : 'badge-keluhan' %>">
+                                                <%= item.kategori %>
+                                            </span>
+                                        </td>
+
+                                        <td class="report-detail">
+                                            <strong><%= item.judul %></strong>
+                                            <span>
+                                                <%= item.deskripsi %>
+                                            </span>
+                                        </td>
+
+                                        <!-- KOLOM BUKTI FOTO -->
+                                        <td>
+                                            <% if (item.foto) { %>
+                                                <a href="/uploads/<%= encodeURIComponent(item.foto) %>"
+                                                target="_blank"
+                                                rel="noopener noreferrer">
+                                                    <img
+                                                        src="/uploads/<%= encodeURIComponent(item.foto) %>"
+                                                        alt="Foto Bukti Laporan"
+                                                        style="
+                                                            width: 75px;
+                                                            height: 65px;
+                                                            object-fit: cover;
+                                                            border-radius: 7px;
+                                                            border: 1px solid #e2e8f0;
+                                                            cursor: pointer;
+                                                        ">
+                                                </a>
+                                            <% } else { %>
+                                                <span style="color:#94a3b8; font-size:11px;">
+                                                    Tidak ada foto
+                                                </span>
+                                            <% } %>
+                                        </td>
+
+                                        <!-- IDENTITAS PELAPOR -->
+                                        <td>
+                                            <% if (item.is_anonim) { %>
+                                                <span style="font-style:italic; color:#64748b;">
+                                                    Anonim (Mahasiswa)
+                                                </span>
+                                            <% } else { %>
+                                                <strong><%= item.nama_lengkap %></strong>
+                                                <br>
+                                                <small style="color:#94a3b8;">
+                                                    NIM: <%= item.nim %>
+                                                </small>
+                                            <% } %>
+                                        </td>
+
+                                        <!-- TINDAKAN -->
+                                        <td>
+                                        <% if (user.role === 'mahasiswa' && Number(user.id) === Number(item.id_mahasiswa)) { %>
+
+                                            <!-- TOMBOL EDIT -->
+                                            
+                                            <button type="button"
+                                                    class="btn-petugas"
+                                                    onclick="bukaModalEditLaporan('<%= item.id %>')"
+                                                    style="background:#eff6ff;color:#2563eb;border:1px solid #bfdbfe;margin-bottom:5px;">
+                                                <i class="fa-solid fa-pen-to-square"></i> Edit
+                                            </button>
+
+
+                                            <!-- TOMBOL SELESAI -->
+                                            <form action="/laporan-mahasiswa/delete/<%= item.id %>"
+                                                method="POST"
+                                                style="margin:0;">
+                                                <button type="submit"
+                                                        class="delete"
+                                                        onclick="return confirm('Apakah masalah ini sudah clear?')">
+                                                    <i class="fa-solid fa-check"></i> Selesai
+                                                </button>
+                                            </form>
+
+                                        <% } else if (user.role === 'petugas') { %>
+
+                                            <form action="/laporan-mahasiswa/delete/<%= item.id %>"
+                                                method="POST"
+                                                style="margin:0;">
+                                                <button type="submit"
+                                                        class="delete"
+                                                        onclick="return confirm('Apakah masalah ini sudah clear?')">
+                                                    <i class="fa-solid fa-check"></i> Selesai
+                                                </button>
+                                            </form>
+
+                                        <% } else { %>
+                                            <span class="no-access">No Access</span>
+                                        <% } %>
+                                    </td>
+                                    </tr>
+                                <% }) %>
+                            </tbody>
+                        </table>
+ 
+                        <!-- POPUP EDIT PENGADUAN -->
+                        <% dataLaporanMahasiswa.forEach(item => { %>
+                            <% if (user.role === 'mahasiswa' && Number(user.id) === Number(item.id_mahasiswa)) { %>
+
+                                <div class="modal-overlay edit-laporan-overlay"
+                                    id="modalEditLaporan<%= item.id %>">
+
+                                    <div class="modal-box edit-modal-box">
+
+                                        <div class="modal-header">
+                                            <div>
+                                                <span class="modal-subtitle">PUSAT KRISIS & KELUHAN</span>
+                                                <h2>Edit Pengaduan</h2>
+                                                <p>Perbarui informasi laporan pengaduan kamu.</p>
+                                            </div>
+
+                                            <button type="button"
+                                                    class="modal-close"
+                                                    onclick="tutupModalEditLaporan('<%= item.id %>')">
+                                                &times;
+                                            </button>
+                                        </div>
+
+                                        <form action="/laporan-mahasiswa/update/<%= item.id %>"
+                                            method="POST"
+                                            enctype="multipart/form-data">
+
+                                            <label>Jenis Laporan</label>
+                                            <select name="kategori" required>
+                                                <option value="Keluhan" <%= item.kategori === 'Keluhan' ? 'selected' : '' %>>
+                                                    Keluhan
+                                                </option>
+                                                <option value="Kehilangan" <%= item.kategori === 'Kehilangan' ? 'selected' : '' %>>
+                                                    Kehilangan
+                                                </option>
+                                            </select>
+
+                                            <label>Judul / Inti Kendala</label>
+                                            <input type="text" name="judul"
+                                                value="<%= item.judul %>" required>
+
+                                            <label>Privasi Identitas Pelapor</label>
+                                            <select name="is_anonim" required>
+                                                <option value="1" <%= item.is_anonim == 1 ? 'selected' : '' %>>
+                                                    Sembunyikan Nama Saya (Anonim)
+                                                </option>
+                                                <option value="0" <%= item.is_anonim == 0 ? 'selected' : '' %>>
+                                                    Tampilkan Nama & NIM
+                                                </option>
+                                            </select>
+
+                                            <label>Detail Kejadian</label>
+                                            <textarea name="deskripsi" rows="4" required><%= item.deskripsi %></textarea>
+
+                                            <div class="edit-form-group">
+                                                    <label>Foto Bukti Saat Ini</label>
+
+                                                    <% if (item.foto) { %>
+                                                        <div class="edit-photo-preview">
+                                                            <img
+                                                                src="/uploads/<%= encodeURIComponent(item.foto) %>"
+                                                                alt="Foto Bukti Pengaduan"
+                                                                onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+
+                                                            <span style="display:none; color:#dc2626; font-size:12px;">
+                                                                Foto tidak dapat dimuat.
+                                                            </span>
+                                                        </div>
+                                                    <% } else { %>
+                                                        <p class="edit-no-photo">Belum ada foto bukti.</p>
+                                                    <% } %>
+
+                                                    <label>Ganti Foto Bukti (Opsional)</label>
+                                                    <input type="file" name="foto"
+                                                        accept="image/jpeg,image/png,image/jpg,image/webp">
+
+                                                    <small class="edit-help">
+                                                        Format JPG, JPEG, PNG, atau WEBP. Maksimal 5 MB.
+                                                    </small>
+                                             </div>
+
+                                            <div class="modal-actions">
+                                                <button type="button"
+                                                        class="btn-cancel"
+                                                        onclick="tutupModalEditLaporan('<%= item.id %>')">
+                                                    Batal
+                                                </button>
+
+                                                <button type="submit" class="btn-save">
+                                                    <i class="fa-solid fa-floppy-disk"></i>
+                                                    Simpan Perubahan
+                                                </button>
+                                            </div>
+
+                                        </form>
+                                    </div>
+                                </div>
+
+                            <% } %>
+                        <% }) %>
+
+
+                    </div>
+                </div>
+
+                <!-- FORM LAPORAN MAHASISWA -->
+                <div class="form-card">
+                    <% if (user.role === 'mahasiswa') { %>
+
+                        <div class="form-heading">
+                            <div class="icon">
+                                <i class="fa-solid fa-file-circle-plus"></i>
+                            </div>
+                            <div>
+                                <h3>Laporkan Masalah</h3>
+                                <p>Sampaikan kendala parkir Anda.</p>
+                            </div>
+                        </div>
+
+                        <form action="/laporan-mahasiswa"
+                            method="POST"
+                            enctype="multipart/form-data">
+
+                            <div class="form-group">
+                                <label>Jenis Laporan</label>
+                                <select name="kategori">
+                                    <option value="Keluhan">
+                                        Keluhan (Macet/Parkir Liar)
+                                    </option>
+                                    <option value="Kehilangan">
+                                        Kehilangan (Barang/Helm)
+                                    </option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Judul / Inti Kendala</label>
+                                <input type="text"
+                                    name="judul"
+                                    required
+                                    placeholder="Contoh: Helm Tertukar di Gedung Viktor">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Privasi Identitas Pelapor</label>
+                                <select name="is_anonim">
+                                    <option value="1">
+                                        Sembunyikan Nama Saya (Anonim)
+                                    </option>
+                                    <option value="0">
+                                        Tampilkan Nama & NIM Saya
+                                    </option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Detail Kejadian</label>
+                                <textarea name="deskripsi"
+                                        rows="4"
+                                        required
+                                        placeholder="Jelaskan detail kejadian, ciri barang, atau lokasi parkir..."></textarea>
+                            </div>
+
+                            <!-- UPLOAD FOTO BUKTI -->
+                            <div class="form-group">
+                                <label>Upload Foto Bukti (Opsional)</label>
+                                <input
+                                    type="file"
+                                    name="foto"
+                                    accept="image/jpeg,image/png,image/jpg,image/webp">
+
+                                <small style="color:#64748b; font-size:10px;">
+                                    Format JPG, JPEG, PNG, atau WEBP. Maksimal 5 MB.
+                                </small>
+                            </div>
+
+                            <button type="submit" class="btn-submit">
+                                <i class="fa-solid fa-paper-plane"></i>
+                                Kirim Laporan
+                            </button>
+                        </form>
+
+                    <% } else { %>
+
+                        <div class="locked-panel">
+                            <div class="locked-icon">
+                                <i class="fa-solid fa-lock"></i>
+                            </div>
+                            <h3>Akses Formulir Terbatas</h3>
+                            <p>
+                                Akun petugas hanya memiliki akses untuk
+                                memantau laporan mahasiswa dan memperbarui
+                                informasi kapasitas lahan parkir.
+                            </p>
+                        </div>
+
+                    <% } %>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="footer">
+            <p>
+                © 2026 UNPAM Smart Parking & Crisis Center.
+                All rights reserved.
+            </p>
+        </footer>
+
+    </main>
+    <!-- MODAL EDIT PARKIR -->
+    <div id="modalEditParkir" class="modal-overlay">
+
+        <div class="modal-box">
+
+            <div class="modal-header">
+                <div>
+                    <span class="modal-subtitle">PENGELOLAAN PARKIR</span>
+                    <h2>Perbarui Status Parkir</h2>
+                    <p>Ubah informasi kapasitas dan kondisi lahan parkir.</p>
+                </div>
+
+                <button type="button" class="modal-close" onclick="tutupModal()">
+                    &times;
+                </button>
+            </div>
+
+            <form id="formEditParkir" method="POST">
+
+                <label>Nama Lokasi / Lantai</label>
+                <input type="text" id="editLantai" readonly>
+
+                <label>Nama Petugas Pengupdate</label>
+                <input type="text" id="editPetugas" readonly>
+
+                <label>Status Kapasitas</label>
+                <select name="status" id="editStatus" required>
+                    <option value="TERSEDIA (KOSONG)">TERSEDIA (KOSONG)</option>
+                    <option value="PENGISIAN (RAMAI)">PENGISIAN (RAMAI)</option>
+                    <option value="PENUH (DITUTUP)">PENUH (DITUTUP)</option>
+                </select>
+
+                <label>Instruksi Terbaru untuk Mahasiswa</label>
+                <textarea name="keterangan" id="editKeterangan" rows="4" required></textarea>
+
+                <div class="modal-actions">
+                    <button type="button" class="btn-cancel" onclick="tutupModal()">
+                        Batal
+                    </button>
+
+                    <button type="submit" class="btn-save">
+                        <i class="fa-solid fa-floppy-disk"></i>
+                        Simpan Perubahan
+                    </button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+    <script>
+        app.use(express.static('public'));
+        function bukaModalParkir(button) {
+
+            const id = button.dataset.id;
+            const lantai = button.dataset.lantai;
+            const petugas = button.dataset.petugas;
+            const status = button.dataset.status;
+            const keterangan = button.dataset.keterangan;
+
+            // Mengatur tujuan penyimpanan
+            document.getElementById('formEditParkir').action =
+                '/parkir/update/' + encodeURIComponent(id);
+
+            // Mengisi data modal
+            document.getElementById('editLantai').value = lantai;
+            document.getElementById('editPetugas').value = petugas || '';
+            document.getElementById('editStatus').value = status;
+            document.getElementById('editKeterangan').value = keterangan || '';
+
+            // Membuka modal
+            document.getElementById('modalEditParkir').classList.add('active');
+
+            document.body.style.overflow = 'hidden';
+        }
+
+        function tutupModal() {
+
+            document.getElementById('modalEditParkir').classList.remove('active');
+
+            document.body.style.overflow = '';
+        }
+
+        // Klik bagian luar modal
+        document.getElementById('modalEditParkir').addEventListener('click', function(e) {
+            if (e.target === this) {
+                tutupModal();
+            }
+        });
+
+        // Tombol Escape
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                tutupModal();
+            }
+        });
+
+        // =================================
+        // MODAL EDIT PENGADUAN
+        // =================================
+
+        function bukaModalEditLaporan(id) {
+            const modal = document.getElementById('modalEditLaporan' + id);
+
+            if (!modal) return;
+
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function tutupModalEditLaporan(id) {
+            const modal = document.getElementById('modalEditLaporan' + id);
+
+            if (!modal) return;
+
+            modal.classList.remove('active');
+
+            // Kembalikan scroll jika tidak ada modal lain yang terbuka
+            if (!document.querySelector('.modal-overlay.active')) {
+                document.body.style.overflow = '';
+            }
+        }
+
+        // Tutup jika klik bagian luar popup
+        document.querySelectorAll('.edit-laporan-overlay').forEach(modal => {
+            modal.addEventListener('click', function(e) {
+                if (e.target === this) {
+                    const id = this.id.replace('modalEditLaporan', '');
+                    tutupModalEditLaporan(id);
+                }
+            });
+        });
+
+        // Tutup popup Edit dengan tombol Escape
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.edit-laporan-overlay.active').forEach(modal => {
+                    const id = modal.id.replace('modalEditLaporan', '');
+                    tutupModalEditLaporan(id);
+                });
+            }
+        });
+
+    </script>
+</body>
+</html>
