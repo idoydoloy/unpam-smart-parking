@@ -1145,6 +1145,16 @@ textarea {
     .edit-modal-box .modal-header h2 {
         font-size: 18px;
     }
+    .thumb-img {
+    width: 85px;
+    height: 65px;
+    object-fit: cover;
+    border-radius: 6px;
+    border: 1px solid #cbd5e1;
+    cursor: pointer;
+    display: block;
+}
+
 }
 </style>
 </head>
@@ -1335,7 +1345,7 @@ textarea {
                                         <td>
                                            <% if (item.foto) { %>
                                                 <a href="<%= item.foto %>" target="_blank" title="Klik untuk perbesar foto">
-                                                    <img src="<%= item.foto %>" alt="Foto" class="thumb-img">
+                                                    <img src="<%= item.foto %>" alt="Foto Bukti" class="thumb-img">
                                                 </a>
                                             <% } else { %>
                                                 <span style="color: #94a3b8; font-size: 12px;">Belum ada foto</span>
