@@ -1333,27 +1333,14 @@ textarea {
 
                                         <!-- KOLOM BUKTI FOTO -->
                                         <td>
-                                            <% if (item.foto) { %>
-                                                <a href="/uploads/<%= encodeURIComponent(item.foto) %>"
-                                                target="_blank"
-                                                rel="noopener noreferrer">
-                                                    <img
-                                                        src="/uploads/<%= encodeURIComponent(item.foto) %>"
-                                                        alt="Foto Bukti Laporan"
-                                                        style="
-                                                            width: 75px;
-                                                            height: 65px;
-                                                            object-fit: cover;
-                                                            border-radius: 7px;
-                                                            border: 1px solid #e2e8f0;
-                                                            cursor: pointer;
-                                                        ">
+                                           <% if (item.foto) { %>
+                                                <a href="<%= item.foto %>" target="_blank" title="Klik untuk perbesar foto">
+                                                    <img src="<%= item.foto %>" alt="Foto" class="thumb-img">
                                                 </a>
                                             <% } else { %>
-                                                <span style="color:#94a3b8; font-size:11px;">
-                                                    Tidak ada foto
-                                                </span>
+                                                <span style="color: #94a3b8; font-size: 12px;">Belum ada foto</span>
                                             <% } %>
+
                                         </td>
 
                                         <!-- IDENTITAS PELAPOR -->

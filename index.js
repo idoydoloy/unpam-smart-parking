@@ -15,19 +15,13 @@ app.set('view engine', 'ejs');
 
 // KONFIGURASI MULTER UNTUK UPLOAD FOTO (Aman untuk Laptop & Vercel)
 const uploadDir = process.env.VERCEL ? '/tmp' : path.join(__dirname, 'public/uploads');
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, uploadDir);
-    },
-});
+// KONFIGURASI MULTER KE MEMORI (AMAN UNTUK VERCEL)
+const storage = multer.memoryStorage();
 const upload = multer({
     storage: storage,
-    limits: {
-        fileSize: 5 * 1024 * 1024
-    },
+    limits: { fileSize: 2 * 1024 * 1024 }, // Maksimal 2MB agar database tetap ringan
     fileFilter: (req, file, cb) => {
         const allowedTypes = ['image/jpeg', 'image/png', 'image/jpg', 'image/webp'];
-
         if (allowedTypes.includes(file.mimetype)) {
             cb(null, true);
         } else {
@@ -35,6 +29,7 @@ const upload = multer({
         }
     }
 });
+
 // 1. SETUP SESSION UNTUK PENGAMANAN LOGIN
 app.use(session({
     secret: 'unpam_parking_secret_key',
@@ -157,7 +152,7 @@ app.post('/laporan-mahasiswa', checkLogin, upload.single('foto'), async (req, re
     try {
         const { kategori, judul, is_anonim, deskripsi } = req.body;
         const id_mahasiswa = req.session.user.id;
-        const foto = req.file ? req.file.filename : null; // Ambil nama file foto jika ada
+        const foto = req.file ? `data:${req.file.mimetype};base64,${req.file.buffer.toString('base64')}` : null;
         
         const sql = 'INSERT INTO laporan_mahasiswa (kategori, judul, is_anonim, deskripsi, id_mahasiswa, foto) VALUES (?, ?, ?, ?, ?, ?)';
         await dbPool.query(sql, [kategori, judul, parseInt(is_anonim), deskripsi, id_mahasiswa, foto]);
@@ -177,7 +172,7 @@ app.post('/laporan-mahasiswa/update/:id', checkLogin, upload.single('foto'), asy
         if (rows.length === 0) return res.status(404).send("Laporan tidak ditemukan");
 
         if (req.session.user.role === 'mahasiswa' && req.session.user.id === rows[0].id_mahasiswa) {
-            const foto = req.file ? req.file.filename : rows[0].foto; // Pakai foto baru jika diupload, jika tidak pakai foto lama
+            const foto = req.file ? `data:${req.file.mimetype};base64,${req.file.buffer.toString('base64')}` : rows[0].foto;
             const sql = 'UPDATE laporan_mahasiswa SET kategori = ?, judul = ?, is_anonim = ?, deskripsi = ?, foto = ? WHERE id = ?';
             await dbPool.query(sql, [kategori, judul, parseInt(is_anonim), deskripsi, foto, id]);
             return res.redirect('/');
@@ -206,7 +201,7 @@ app.post('/parkir/update/:id', checkLogin, upload.single('foto'), async (req, re
             return res.status(404).send("Data parkir tidak ditemukan");
         }
 
-        const foto = req.file ? req.file.filename : rows[0].foto;
+        const foto = req.file ? `data:${req.file.mimetype};base64,${req.file.buffer.toString('base64')}` : rows[0].foto;
 
         const sql = 'UPDATE status_parkir SET status = ?, keterangan = ?, id_petugas = ?, foto = ? WHERE id = ?';
         await dbPool.query(sql, [status, keterangan, id_petugas, foto, id]);
