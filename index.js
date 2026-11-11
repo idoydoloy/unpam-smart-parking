@@ -6,20 +6,19 @@ const multer = require('multer');
 const path = require('path');
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static('public')); // Wajib agar foto di public/uploads bisa muncul di browser
+app.use(express.static(path.join(__dirname, 'public')));
+app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-// KONFIGURASI MULTER UNTUK UPLOAD FOTO
+// KONFIGURASI MULTER UNTUK UPLOAD FOTO (Aman untuk Laptop & Vercel)
+const uploadDir = process.env.VERCEL ? '/tmp' : path.join(__dirname, 'public/uploads');
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, 'public/uploads/');
+        cb(null, uploadDir);
     },
-    filename: (req, file, cb) => {
-        cb(null, Date.now() + path.extname(file.originalname));
-    }
 });
 const upload = multer({
     storage: storage,
@@ -235,3 +234,4 @@ app.post('/laporan-mahasiswa/delete/:id', checkLogin, async (req, res) => {
 });
 
 app.listen(PORT, () => console.log(`Server Real-Time UNPAM Parking Aktif di http://localhost:${PORT}`));
+module.exports = app;
