@@ -45,10 +45,12 @@ app.use(session({
 
 // 2. SETUP POOL KONEKSI DATABASE MYSQL XAMPP
 const dbPool = mysql.createPool({
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'unpam_parking'
+    host: process.env.DB_HOST || 'localhost',
+    port: process.env.DB_PORT || 3306,
+    user: process.env.DB_USER || 'root',
+    password: process.env.DB_PASSWORD || '',
+    database: process.env.DB_NAME || 'unpam_parking',
+    ssl: process.env.DB_HOST ? { rejectUnauthorized: true } : null
 });
 
 // Middleware untuk memproteksi halaman (wajib login)
