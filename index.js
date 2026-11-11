@@ -1,6 +1,6 @@
 const express = require('express');
 const mysql = require('mysql2/promise');
-const session = require('express-session');
+const cookieSession = require('cookie-session');
 const bcrypt = require('bcrypt');
 const multer = require('multer');
 const path = require('path');
@@ -31,11 +31,13 @@ const upload = multer({
 });
 
 // 1. SETUP SESSION UNTUK PENGAMANAN LOGIN
-app.use(session({
-    secret: 'unpam_parking_secret_key',
-    resave: false,
-    saveUninitialized: true
+app.set('trust proxy', 1); // Wajib agar cookie aman berjalan di HTTPS Vercel
+app.use(cookieSession({
+    name: 'unpam_session',
+    keys: ['unpam_parking_secret_key_2026'],
+    maxAge: 24 * 60 * 60 * 1000 // Sesi login bertahan selama 24 jam
 }));
+
 
 // 2. SETUP POOL KONEKSI DATABASE MYSQL XAMPP
 // 1. Pastikan SSL mendukung TLSv1.2 untuk TiDB Cloud
@@ -112,9 +114,10 @@ app.post('/login-petugas', async (req, res) => {
 
 // Proses Logout
 app.get('/logout', (req, res) => {
-    req.session.destroy();
+    req.session = null;
     res.redirect('/login-mahasiswa');
 });
+
 
 
 // --- ROUTES UTAMA DASHBOARD CRUD (TERPROTEKSI) ---
